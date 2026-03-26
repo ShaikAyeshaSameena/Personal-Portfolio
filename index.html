@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shaik Ayesha Sameena — Data Analyst · Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#050508;--bg2:#0c0c14;--surface:#0f0f1a;--card:#131320;--card2:#181828;
+  --border:rgba(255,255,255,0.06);--border-h:rgba(99,179,237,0.35);
+  --gold:#e8c97a;--gold2:#b8942a;--teal:#63b3ed;--rose:#fc8181;--green:#68d391;
+  --text:#eeeef5;--muted:#6b6b8a;--muted2:#9090b0;
+  --gg:rgba(232,201,122,0.12);--gt:rgba(99,179,237,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6;cursor:none}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.5}
+
+/* CURSOR */
+#cur{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;mix-blend-mode:difference}
+#cur-r{position:fixed;width:40px;height:40px;border:1px solid rgba(232,201,122,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
+
+/* MESH */
+.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(130px);opacity:.055;animation:bfloat 22s ease-in-out infinite}
+.blob:nth-child(1){width:700px;height:700px;background:var(--gold);top:-200px;right:-150px;animation-delay:0s}
+.blob:nth-child(2){width:550px;height:550px;background:var(--teal);bottom:-200px;left:-150px;animation-delay:-8s}
+.blob:nth-child(3){width:450px;height:450px;background:var(--rose);top:45%;left:35%;animation-delay:-16s}
+@keyframes bfloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-40px) scale(1.06)}66%{transform:translate(-40px,50px) scale(.94)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 5rem;background:rgba(5,5,8,.78);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);transition:padding .3s}
+nav.scrolled{padding:1rem 5rem}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);text-decoration:none;letter-spacing:.05em}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color .3s;position:relative;padding-bottom:3px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{padding:.55rem 1.4rem;border:1px solid var(--gold);color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:all .3s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.nav-cta:hover{background:var(--gold);color:#050508}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:10rem 5rem 5rem;position:relative;z-index:1}
+.hero-inner{max-width:1320px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.1fr .9fr;gap:5rem;align-items:center}
+.hero-eyebrow{display:flex;align-items:center;gap:.8rem;margin-bottom:1.8rem;animation:sup .9s ease both}
+.eyebrow-line{width:40px;height:1px;background:var(--gold)}
+.eyebrow-txt{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,5.8rem);font-weight:700;line-height:1.02;margin-bottom:.4rem;animation:sup .9s .1s ease both}
+.hero-name .it{color:var(--gold);font-style:italic}
+.hero-role{font-family:'JetBrains Mono',monospace;font-size:.82rem;letter-spacing:.1em;color:var(--teal);margin-bottom:2rem;animation:sup .9s .15s ease both}
+.hero-desc{font-size:1.05rem;color:var(--muted2);line-height:1.85;max-width:500px;margin-bottom:2.5rem;animation:sup .9s .2s ease both}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem;animation:sup .9s .25s ease both}
+.tag{padding:.35rem .9rem;border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);background:var(--card);transition:all .3s;cursor:default}
+.tag:hover{border-color:var(--teal);color:var(--teal)}
+.tag.g{border-color:rgba(232,201,122,.3);color:var(--gold)}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:sup .9s .3s ease both}
+.btn-fill{padding:.9rem 2.2rem;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#050508;font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:all .3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));display:inline-flex;align-items:center;gap:.5rem}
+.btn-fill:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(232,201,122,.3)}
+.btn-out{padding:.9rem 2.2rem;border:1px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:all .3s}
+.btn-out:hover{border-color:var(--teal);color:var(--teal)}
+
+/* HERO RIGHT */
+.hero-right{position:relative;display:flex;justify-content:center;animation:fin 1.1s .4s ease both}
+.photo-wrap{position:relative;width:360px;height:440px}
+.photo-frame{position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),rgba(99,179,237,.5),transparent);padding:2px;clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,24px 100%,0 calc(100% - 24px))}
+.photo-inner{width:100%;height:100%;background:var(--card);clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,24px 100%,0 calc(100% - 24px));overflow:hidden}
+.photo-inner img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.photo-fb{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:linear-gradient(135deg,#131320,#1a1a30)}
+.photo-fb svg{opacity:.22}
+.photo-fb span{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.corner{position:absolute;top:-16px;left:-16px;width:60px;height:60px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);opacity:.4}
+.corner2{position:absolute;bottom:-16px;right:-16px;width:60px;height:60px;border-bottom:2px solid var(--teal);border-right:2px solid var(--teal);opacity:.4}
+.stat-c{position:absolute;background:rgba(19,19,32,.95);border:1px solid var(--border);padding:1rem 1.4rem;backdrop-filter:blur(16px)}
+.stat-c.l{bottom:40px;left:-50px;animation:fa 5s ease-in-out infinite}
+.stat-c.t{top:30px;right:-50px;animation:fa 5s 2.5s ease-in-out infinite}
+.stat-n{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);line-height:1}
+.stat-l{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
+@keyframes fa{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* SCROLL HINT */
+.scroll-hint{position:absolute;bottom:3rem;left:5rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:sup 1s .8s ease both}
+.sh-line{width:1px;height:70px;background:linear-gradient(to bottom,transparent,var(--gold));animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sh-txt{font-family:'JetBrains Mono',monospace;font-size:.46rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-lr;transform:rotate(180deg)}
+
+/* SECTIONS */
+.sec{padding:8rem 5rem;position:relative;z-index:1}
+.sec-alt{background:var(--surface)}
+.si{max-width:1320px;margin:0 auto}
+.sec-lbl{display:flex;align-items:center;gap:.6rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.sec-lbl::before{content:'//';opacity:.5}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:700;line-height:1.1;margin-bottom:1rem}
+.sec-title .it{font-style:italic;color:var(--gold)}
+.sec-sub{font-size:.95rem;color:var(--muted2);max-width:500px;line-height:1.75}
+.sec-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;gap:2rem}
+.sec-hd-l{flex:1}
+.sec-div{flex:1;height:1px;background:var(--border)}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(36px);transition:opacity .75s ease,transform .75s ease}
+.rev.up{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:5rem;align-items:start}
+.about-text p{font-size:1.05rem;line-height:1.95;color:rgba(238,238,245,.78);margin-bottom:1.5rem}
+.about-text p:first-of-type::first-letter{font-family:'Playfair Display',serif;font-size:3.8rem;line-height:.8;float:left;margin-right:.12em;color:var(--gold);font-weight:700}
+.hi-list{display:flex;flex-direction:column;gap:1rem}
+.hi-card{padding:1.4rem 1.6rem;background:var(--card);border:1px solid var(--border);display:flex;align-items:flex-start;gap:1.2rem;transition:all .35s;cursor:default}
+.hi-card:hover{border-color:var(--border-h);transform:translateX(6px);background:var(--card2)}
+.hi-icon{width:38px;height:38px;flex-shrink:0;background:var(--gg);border:1px solid rgba(232,201,122,.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.hi-k{font-family:'JetBrains Mono',monospace;font-size:.53rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.hi-v{font-size:.88rem;color:var(--text)}
+/* ACHIEVEMENTS */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.2rem;margin-top:3rem}
+.ach-card{padding:1.5rem;background:var(--card);border:1px solid var(--border);display:flex;gap:1rem;align-items:flex-start;transition:all .3s}
+.ach-card:hover{border-color:rgba(104,211,145,.3);background:var(--card2)}
+.ach-ic{font-size:1.4rem;flex-shrink:0}
+.ach-t{font-size:.86rem;color:var(--muted2);line-height:1.6}
+.ach-t strong{color:var(--green);font-weight:500;display:block;margin-bottom:.2rem;font-size:.78rem;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
+
+/* SKILLS */
+.sk-cats{display:flex;flex-direction:column;gap:2.5rem}
+.sk-cat-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.sk-cat-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
+.sk-row{display:flex;flex-wrap:wrap;gap:.8rem}
+.sk-pill{padding:.6rem 1.2rem;background:var(--card);border:1px solid var(--border);font-size:.85rem;color:var(--muted2);transition:all .3s;display:flex;align-items:center;gap:.5rem;cursor:default}
+.sk-pill:hover{border-color:var(--border-h);color:var(--text);background:var(--card2);transform:translateY(-3px)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.dot.g{background:var(--gold)}.dot.gr{background:var(--green)}.dot.r{background:var(--rose)}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(370px,1fr));gap:2rem}
+.proj-card{background:var(--card);border:1px solid var(--border);overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:all .4s;position:relative}
+.proj-card:hover{border-color:var(--border-h);transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.proj-top{padding:2.2rem 2.2rem 0;display:flex;justify-content:space-between;align-items:flex-start}
+.proj-num{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;line-height:1;color:rgba(232,201,122,.1)}
+.proj-badge{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .7rem;border:1px solid;transition:all .3s}
+.pb-live{border-color:rgba(104,211,145,.4);color:var(--green)}
+.pb-react{border-color:rgba(99,179,237,.4);color:var(--teal)}
+.pb-azure{border-color:rgba(252,129,129,.4);color:var(--rose)}
+.pb-html{border-color:rgba(232,201,122,.4);color:var(--gold)}
+.proj-body{padding:1rem 2.2rem 2.2rem;flex:1;display:flex;flex-direction:column}
+.proj-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:.7rem;color:var(--text)}
+.proj-desc{font-size:.87rem;color:var(--muted2);line-height:1.75;margin-bottom:1.5rem;flex:1}
+.proj-tech{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.tech-t{font-family:'JetBrains Mono',monospace;font-size:.48rem;letter-spacing:.1em;padding:.25rem .6rem;background:var(--bg2);border:1px solid var(--border);color:var(--muted2)}
+.proj-footer{border-top:1px solid var(--border);padding-top:1.2rem;display:flex;align-items:center;justify-content:space-between}
+.proj-lnk{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:.4rem;transition:gap .3s}
+.proj-card:hover .proj-lnk{gap:.8rem}
+.proj-ext{color:var(--muted);font-size:.9rem}
+
+/* SHOWCASE */
+.showcase{grid-column:1/-1;background:linear-gradient(135deg,var(--card),#0d0d20);border:1px solid var(--border);padding:3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;text-decoration:none;color:inherit;transition:all .4s;position:relative;overflow:hidden}
+.showcase::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gg),var(--gt));opacity:0;transition:opacity .4s}
+.showcase:hover{border-color:var(--border-h);transform:translateY(-4px)}
+.showcase:hover::before{opacity:1}
+.shw-l{position:relative;z-index:1}
+.shw-feat{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem}
+.shw-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:1rem;color:var(--text)}
+.shw-desc{font-size:.88rem;color:var(--muted2);line-height:1.8;margin-bottom:1.5rem}
+.shw-r{position:relative;z-index:1}
+.pipeline{display:flex;align-items:center;flex-wrap:wrap;gap:0}
+.pipe-step{flex:1;min-width:80px;background:var(--bg2);border:1px solid var(--border);padding:.9rem .5rem;text-align:center;transition:all .3s}
+.showcase:hover .pipe-step{border-color:rgba(99,179,237,.2)}
+.pipe-ic{font-size:1.3rem;margin-bottom:.4rem}
+.pipe-nm{font-family:'JetBrains Mono',monospace;font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);display:block}
+.pipe-arr{color:var(--gold);font-size:.9rem;padding:0 .1rem;flex-shrink:0}
+.pipe-lbl{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:1rem}
+
+/* EXPERIENCE */
+.exp-tl{display:flex;flex-direction:column;gap:2rem}
+.exp-card{display:grid;grid-template-columns:120px 1fr;gap:2.5rem;align-items:stretch;text-decoration:none;color:inherit;transition:all .35s}
+.exp-card:hover{transform:translateX(8px)}
+.exp-dt{display:flex;flex-direction:column;align-items:flex-end;padding-top:1.5rem;border-right:1px solid var(--border);padding-right:2rem;position:relative}
+.exp-dt::after{content:'';position:absolute;right:-5px;top:1.8rem;width:9px;height:9px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);transition:background .3s,transform .3s}
+.exp-card:hover .exp-dt::after{background:var(--teal);transform:scale(1.4)}
+.exp-period{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.1em;color:var(--muted);text-align:right;line-height:1.6}
+.exp-body{background:var(--card);border:1px solid var(--border);padding:2rem 2.2rem;transition:border-color .3s}
+.exp-card:hover .exp-body{border-color:var(--border-h)}
+.exp-co{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:.35rem}
+.exp-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:.8rem;color:var(--text)}
+.exp-desc{font-size:.87rem;color:var(--muted2);line-height:1.75;margin-bottom:1rem}
+.exp-bul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.exp-bul li{font-size:.84rem;color:var(--muted2);padding-left:1.2rem;position:relative}
+.exp-bul li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:.72rem}
+.exp-cert{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;font-family:'JetBrains Mono',monospace;font-size:.53rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(232,201,122,.3);padding:.4rem .9rem;transition:all .3s}
+.exp-cert:hover{background:var(--gg);border-color:var(--gold)}
+
+/* CERTS */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+.cert-card{background:var(--card);border:1px solid var(--border);padding:2rem;text-decoration:none;color:inherit;transition:all .35s;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:.8rem}
+.cert-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gg),transparent);opacity:0;transition:opacity .4s}
+.cert-card:hover{border-color:rgba(232,201,122,.3);transform:translateY(-5px)}
+.cert-card:hover::before{opacity:1}
+.cert-arr{position:absolute;top:1.2rem;right:1.2rem;color:var(--gold);opacity:0;transition:opacity .3s,transform .3s;font-size:1rem}
+.cert-card:hover .cert-arr{opacity:1;transform:translate(2px,-2px)}
+.cert-org{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);position:relative;z-index:1}
+.cert-nm{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:var(--text);position:relative;z-index:1;line-height:1.3}
+.cert-dot{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:.25rem .6rem;width:fit-content;position:relative;z-index:1}
+.cert-dot::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green)}
+
+/* EDUCATION */
+.edu-list{display:flex;flex-direction:column}
+.edu-row{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:start;padding:2.5rem 0;border-bottom:1px solid var(--border);transition:all .3s;position:relative;overflow:hidden}
+.edu-row::before{content:'';position:absolute;left:-2rem;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--gold),var(--teal));transition:left .35s;opacity:0}
+.edu-row:hover{padding-left:1.5rem}
+.edu-row:hover::before{left:0;opacity:1}
+.edu-deg{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.edu-inst{font-size:.9rem;color:var(--muted2)}
+.edu-yr{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;color:var(--gold);white-space:nowrap;padding-top:.3rem}
+
+/* CONTACT */
+.ct-wrap{background:linear-gradient(135deg,#0c0c18,#050508);border-top:1px solid var(--border);padding:8rem 5rem;position:relative;overflow:hidden;z-index:1}
+.ct-bg{position:absolute;right:-3rem;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:12rem;font-weight:700;color:rgba(232,201,122,.025);white-space:nowrap;pointer-events:none;user-select:none}
+.ct-inner{max-width:1320px;margin:0 auto}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.ct-headline{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:700;line-height:1.1;margin-bottom:1.2rem}
+.ct-headline .it{font-style:italic;color:var(--gold)}
+.ct-sub{font-size:1rem;color:var(--muted2);line-height:1.8;margin-bottom:2rem}
+.ct-list{display:flex;flex-direction:column;gap:.9rem}
+.ct-item{display:flex;align-items:center;gap:1.5rem;padding:1.4rem 1.8rem;background:var(--card);border:1px solid var(--border);text-decoration:none;color:inherit;transition:all .35s;position:relative;overflow:hidden}
+.ct-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--gg),transparent);transition:width .4s}
+.ct-item:hover{border-color:var(--border-h)}
+.ct-item:hover::before{width:100%}
+.ct-ic{width:42px;height:42px;flex-shrink:0;background:var(--gg);border:1px solid rgba(232,201,122,.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;position:relative;z-index:1}
+.ct-b{flex:1;position:relative;z-index:1}
+.ct-lbl{font-family:'JetBrains Mono',monospace;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.ct-val{font-size:.9rem;color:var(--text)}
+.ct-arr{color:var(--gold);font-size:1rem;position:relative;z-index:1;opacity:0;transform:translateX(-6px);transition:all .3s}
+.ct-item:hover .ct-arr{opacity:1;transform:translateX(0)}
+
+/* FOOTER */
+footer{padding:2rem 5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);position:relative;z-index:1}
+.f-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold)}
+footer p{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.18em;color:var(--muted)}
+.f-links{display:flex;gap:1.5rem}
+.f-links a{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.f-links a:hover{color:var(--teal)}
+
+/* ANIMATIONS */
+@keyframes sup{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fin{from{opacity:0}to{opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav{padding:1.2rem 2.5rem}
+  .nav-links,.nav-cta{display:none}
+  .hero{padding:8rem 2.5rem 5rem}
+  .hero-inner{grid-template-columns:1fr;gap:3.5rem}
+  .hero-right{order:-1}
+  .photo-wrap{width:280px;height:340px}
+  .stat-c.l{left:-10px}.stat-c.t{right:-10px}
+  .sec{padding:5rem 2.5rem}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .ct-grid{grid-template-columns:1fr;gap:3rem}
+  .ct-wrap{padding:5rem 2.5rem}
+  .showcase{grid-template-columns:1fr;gap:2rem}
+  .proj-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem}
+  .scroll-hint{left:2.5rem}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+<div class="mesh"><div class="blob"></div><div class="blob"></div><div class="blob"></div></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#home" class="nav-logo">Shaik Ayesha Sameena</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://personal-portfolio-mocha-six-82.vercel.app/resume.pdf" target="_blank" class="nav-cta">Resume ↓</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="eyebrow-line"></div><div class="eyebrow-txt">Open to Opportunities · Vijayawada, India</div></div>
+      <h1 class="hero-name">Shaik <span class="it">Ayesha</span><br>Sameena</h1>
+      <p class="hero-role">[ Data Analyst · Data Engineer · Frontend Developer ]</p>
+      <p class="hero-desc">Detail-oriented BCA student with hands-on experience building real-time Azure data pipelines, Power BI dashboards, and interactive React web applications.</p>
+      <div class="hero-tags">
+        <span class="tag g">SQL · Power BI</span>
+        <span class="tag">Azure Data Engineering</span>
+        <span class="tag">Python</span>
+        <span class="tag">React.js</span>
+        <span class="tag">AWS S3</span>
+        <span class="tag">ETL · Star Schema</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-fill">Let's Connect →</a>
+        <a href="https://personal-portfolio-mocha-six-82.vercel.app/resume.pdf" target="_blank" class="btn-out">Download Resume</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="photo-wrap">
+        <div class="photo-frame">
+          <div class="photo-inner">
+            <img src="https://personal-portfolio-mocha-six-82.vercel.app/profile.jpg" alt="Shaik Ayesha Sameena" onerror="this.style.display='none';document.querySelector('.photo-fb').style.display='flex'"/>
+            <div class="photo-fb" style="display:none">
+              <svg width="72" height="72" fill="none" viewBox="0 0 72 72"><circle cx="36" cy="26" r="14" stroke="#e8c97a" stroke-width="1.5"/><path d="M8 64c0-15.464 12.536-28 28-28s28 12.536 28 28" stroke="#e8c97a" stroke-width="1.5"/></svg>
+              <span>Profile Photo</span>
+            </div>
+          </div>
+        </div>
+        <div class="corner"></div><div class="corner2"></div>
+        <div class="stat-c l"><div class="stat-n">3+</div><div class="stat-l">Internships</div></div>
+        <div class="stat-c t"><div class="stat-n">5+</div><div class="stat-l">Projects</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="sh-line"></div><div class="sh-txt">Scroll</div></div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="si">
+    <div class="sec-hd rev"><div class="sec-hd-l"><div class="sec-lbl">01 — About Me</div><h2 class="sec-title">The Story Behind<br>the <span class="it">Code & Data</span></h2></div><div class="sec-div"></div></div>
+    <div class="about-grid">
+      <div class="about-text rev">
+        <p>Detail-oriented BCA student passionate about turning raw data into meaningful insights and building elegant digital experiences. I thrive at the intersection of data engineering and creative development.</p>
+        <p>With hands-on internship experience in both cloud data engineering (Azure) and frontend development (React), I bring a rare combination of analytical thinking and design sensibility. I'm seeking entry-level roles as a Data Analyst, Data Engineer, or Frontend Developer.</p>
+      </div>
+      <div class="hi-list rev d2">
+        <div class="hi-card"><div class="hi-icon">🎓</div><div><div class="hi-k">Degree</div><div class="hi-v">BCA — PB Siddhartha College of Arts & Science</div></div></div>
+        <div class="hi-card"><div class="hi-icon">📍</div><div><div class="hi-k">Location</div><div class="hi-v">Vijayawada, Andhra Pradesh, India</div></div></div>
+        <div class="hi-card"><div class="hi-icon">🎯</div><div><div class="hi-k">Target Roles</div><div class="hi-v">Data Analyst · Data Engineer · Frontend Developer</div></div></div>
+        <div class="hi-card"><div class="hi-icon">💡</div><div><div class="hi-k">Interests</div><div class="hi-v">Cloud Pipelines · Power BI Dashboards · Web Apps</div></div></div>
+      </div>
+    </div>
+    <div class="sec-lbl rev" style="margin-top:4rem;margin-bottom:.8rem">Achievements & Leadership</div>
+    <div class="ach-grid">
+      <div class="ach-card rev d1"><div class="ach-ic">👑</div><div class="ach-t"><strong>Head Girl</strong>Served as Head Girl demonstrating strong leadership and organizational skills.</div></div>
+      <div class="ach-card rev d2"><div class="ach-ic">🥇</div><div class="ach-t"><strong>National Level</strong>1st place at National Level Drawing Competition & multiple art prizes.</div></div>
+      <div class="ach-card rev d3"><div class="ach-ic">🎤</div><div class="ach-t"><strong>Event Host</strong>Successfully hosted & coordinated multiple college-level events.</div></div>
+      <div class="ach-card rev d4"><div class="ach-ic">🏆</div><div class="ach-t"><strong>3rd at Loyola Tech Quiz</strong>Secured 3rd place among 120 participants in Technical Quiz.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="sec sec-alt" id="skills">
+  <div class="si">
+    <div class="sec-hd rev"><div class="sec-hd-l"><div class="sec-lbl">02 — Technical Skills</div><h2 class="sec-title">Tools of the<br><span class="it">Trade</span></h2></div><div class="sec-div"></div></div>
+    <div class="sk-cats">
+      <div class="rev"><div class="sk-cat-lbl">Programming Languages</div><div class="sk-row"><div class="sk-pill"><span class="dot g"></span>Python</div><div class="sk-pill"><span class="dot g"></span>C</div><div class="sk-pill"><span class="dot g"></span>SQL</div></div></div>
+      <div class="rev d1"><div class="sk-cat-lbl">Data & Analytics</div><div class="sk-row"><div class="sk-pill"><span class="dot"></span>Power BI</div><div class="sk-pill"><span class="dot"></span>Excel</div><div class="sk-pill"><span class="dot"></span>ETL Pipelines</div><div class="sk-pill"><span class="dot"></span>Star Schema Design</div><div class="sk-pill"><span class="dot"></span>Data Warehousing</div><div class="sk-pill"><span class="dot"></span>DBMS</div></div></div>
+      <div class="rev d2"><div class="sk-cat-lbl">Cloud & Data Engineering</div><div class="sk-row"><div class="sk-pill"><span class="dot r"></span>Azure Event Hubs</div><div class="sk-pill"><span class="dot r"></span>Azure Stream Analytics</div><div class="sk-pill"><span class="dot r"></span>Azure Data Factory</div><div class="sk-pill"><span class="dot r"></span>Azure Databricks (PySpark)</div><div class="sk-pill"><span class="dot r"></span>ADLS</div><div class="sk-pill"><span class="dot r"></span>Azure SQL Database</div><div class="sk-pill"><span class="dot r"></span>AWS S3</div></div></div>
+      <div class="rev d3"><div class="sk-cat-lbl">Web & Frontend Development</div><div class="sk-row"><div class="sk-pill"><span class="dot gr"></span>React.js</div> <div class="sk-pill"><span class="dot gr"></span>HTML5</div><div class="sk-pill"><span class="dot gr"></span>CSS3</div> </div></div>
+      <div class="rev d4"><div class="sk-cat-lbl">Tools</div><div class="sk-row"><div class="sk-pill"><span class="dot"></span>GitHub</div><div class="sk-pill"><span class="dot"></span>VS Code</div><div class="sk-pill"><span class="dot"></span>Vercel</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="sec" id="projects">
+  <div class="si">
+    <div class="sec-hd rev"><div class="sec-hd-l"><div class="sec-lbl">03 — Projects</div><h2 class="sec-title">Selected<br><span class="it">Work</span></h2></div><div class="sec-div"></div></div>
+
+    <!-- Featured -->
+    <div style="margin-bottom:2rem">
+      <div class="showcase rev">
+        <div class="shw-l">
+          <div class="shw-feat">★ FEATURED — Internship Project</div>
+          <div class="shw-title">Azure Retail Data Engineering Pipeline</div>
+          <div class="shw-desc">Designed and implemented a real-time end-to-end data pipeline — streaming ingestion to live Power BI dashboards. Ingested retail sales data via Azure Event Hubs → Stream Analytics → ADLS → Databricks PySpark → Star Schema → Azure SQL → Power BI for live revenue monitoring.</div>
+          <div class="proj-tech" style="margin-bottom:1rem"><span class="tech-t">Azure Event Hubs</span><span class="tech-t">Stream Analytics</span><span class="tech-t">Databricks</span><span class="tech-t">PySpark</span><span class="tech-t">ADLS</span><span class="tech-t">Star Schema</span><span class="tech-t">Azure SQL</span><span class="tech-t">Power BI</span></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)">Edubot Internship · Dec 2025 – Mar 2026 →</span>
+        </div>
+        <div class="shw-r">
+          <div class="pipeline">
+            <div class="pipe-step"><div class="pipe-ic">📡</div><span class="pipe-nm">Event Hubs</span></div>
+            <div class="pipe-arr">→</div>
+            <div class="pipe-step"><div class="pipe-ic">⚡</div><span class="pipe-nm">Stream Analytics</span></div>
+            <div class="pipe-arr">→</div>
+            <div class="pipe-step"><div class="pipe-ic">🏞️</div><span class="pipe-nm">ADLS</span></div>
+            <div class="pipe-arr">→</div>
+            <div class="pipe-step"><div class="pipe-ic">🔥</div><span class="pipe-nm">Databricks</span></div>
+            <div class="pipe-arr">→</div>
+            <div class="pipe-step"><div class="pipe-ic">🗃️</div><span class="pipe-nm">Azure SQL</span></div>
+            <div class="pipe-arr">→</div>
+            <div class="pipe-step"><div class="pipe-ic">📊</div><span class="pipe-nm">Power BI</span></div>
+          </div>
+          <div class="pipe-lbl">Real-Time Pipeline Architecture</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-grid">
+      <a href="https://hospital-website-2gv6.vercel.app" target="_blank" class="proj-card rev">
+        <div class="proj-top"><div class="proj-num">01</div><span class="proj-badge pb-react">React.js</span></div>
+        <div class="proj-body">
+          <div class="proj-title">Hospital Website</div>
+          <div class="proj-desc">A fully responsive hospital UI built with React.js — featuring department pages, doctor profiles, appointment forms, and client-side routing. Delivered as a frontend internship project for a startup opportunity.</div>
+          <div class="proj-tech"><span class="tech-t">React.js</span><span class="tech-t">CSS3</span><span class="tech-t">React Router</span><span class="tech-t">Vercel</span></div>
+          <div class="proj-footer"><span class="proj-lnk">View Live <span>→</span></span><span class="proj-ext">↗</span></div>
+        </div>
+      </a>
+      <a href="http://ghiza-family-restaurant-vnpu.vercel.app" target="_blank" class="proj-card rev d1">
+        <div class="proj-top"><div class="proj-num">02</div><span class="proj-badge pb-live">MERN Stack</span></div>
+        <div class="proj-body">
+          <div class="proj-title">Ghiza Family Restaurant</div>
+          <div class="proj-desc">Interactive restaurant website with online booking, category-based menu, and dynamic ordering. Built with a full MERN stack — React frontend with Node/Express backend structure and MongoDB for data storage.</div>
+          <div class="proj-tech"><span class="tech-t">MongoDB</span><span class="tech-t">Express.js</span><span class="tech-t">React.js</span><span class="tech-t">Node.js</span></div>
+          <div class="proj-footer"><span class="proj-lnk">View Live <span>→</span></span><span class="proj-ext">↗</span></div>
+        </div>
+      </a>
+      <a href="http://samcafe1028.s3-website-us-east-1.amazonaws.com" target="_blank" class="proj-card rev d2">
+        <div class="proj-top"><div class="proj-num">03</div><span class="proj-badge pb-azure">AWS Cloud</span></div>
+        <div class="proj-body">
+          <div class="proj-title">Cloud Static Website Hosting</div>
+          <div class="proj-desc">Hosted a static website on AWS S3 with bucket policy configuration and public access setup — demonstrating practical cloud infrastructure and deployment knowledge.</div>
+          <div class="proj-tech"><span class="tech-t">AWS S3</span><span class="tech-t">Bucket Policies</span><span class="tech-t">Static Hosting</span></div>
+          <div class="proj-footer"><span class="proj-lnk">View Live <span>→</span></span><span class="proj-ext">↗</span></div>
+        </div>
+      </a>
+      <a href="https://personal-portfolio-mocha-six-82.vercel.app" target="_blank" class="proj-card rev d3">
+        <div class="proj-top"><div class="proj-num">04</div><span class="proj-badge pb-html">HTML · CSS</span></div>
+        <div class="proj-body">
+          <div class="proj-title">Personal Portfolio Website</div>
+          <div class="proj-desc">Designed and developed a responsive personal portfolio from scratch — showcasing skills, certifications, internships, and projects with a clean, intuitive layout.</div>
+          <div class="proj-tech"><span class="tech-t">HTML5</span><span class="tech-t">CSS3</span><span class="tech-t">Vercel</span></div>
+          <div class="proj-footer"><span class="proj-lnk">View Live <span>→</span></span><span class="proj-ext">↗</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec sec-alt" id="experience">
+  <div class="si">
+    <div class="sec-hd rev"><div class="sec-hd-l"><div class="sec-lbl">04 — Internships & Experience</div><h2 class="sec-title">Real-World<br><span class="it">Experience</span></h2></div><div class="sec-div"></div></div>
+    <div class="exp-tl">
+      <div class="exp-card rev">
+        <div class="exp-dt"><div class="exp-period">Dec 2025<br>–<br>Mar 2026</div></div>
+        <div class="exp-body">
+          <div class="exp-co">Edubot · Vijayawada</div>
+          <div class="exp-title">Data Engineering Internship</div>
+          <div class="exp-desc">Built a real-time retail analytics pipeline using the full Azure ecosystem — from streaming ingestion to live Power BI dashboards.</div>
+          <ul class="exp-bul">
+            <li>Ingested streaming retail sales data using Azure Event Hubs and processed with Azure Stream Analytics</li>
+            <li>Stored raw data in Azure Data Lake Storage (ADLS); transformed using Azure Databricks & PySpark</li>
+            <li>Designed Fact-Dimension tables with Star Schema and loaded into Azure SQL Database</li>
+            <li>Developed interactive Power BI dashboards for live sales trends and revenue insights</li>
+          </ul>
+          <a href="https://personal-portfolio-mocha-six-82.vercel.app/mern-stack.pdf" target="_blank" class="exp-cert">View Certificate ↗</a>
+        </div>
+      </div>
+      <div class="exp-card rev d1">
+        <div class="exp-dt"><div class="exp-period">Jan 2025<br>–<br>Feb 2025</div></div>
+        <div class="exp-body">
+          <div class="exp-co">Corizo</div>
+          <div class="exp-title">Cloud Computing Virtual Internship</div>
+          <div class="exp-desc">Practical cloud infrastructure experience with AWS services and deployment workflows.</div>
+          <ul class="exp-bul">
+            <li>Deployed static websites using AWS S3 and configured bucket policies for public access</li>
+            <li>Gained hands-on exposure to cloud storage, hosting concepts, and deployment pipelines</li>
+          </ul>
+          <a href="https://personal-portfolio-mocha-six-82.vercel.app/cloud-internship-corizo.pdf" target="_blank" class="exp-cert">View Certificate ↗</a>
+        </div>
+      </div>
+      <div class="exp-card rev d2">
+        <div class="exp-dt"><div class="exp-period">2024<br>(Virtual)</div></div>
+        <div class="exp-body">
+          <div class="exp-co">Blackbucks</div>
+          <div class="exp-title">MERN Stack Development Internship</div>
+          <div class="exp-desc">Built full-stack applications using the MERN stack, developing practical web development skills.</div>
+          <ul class="exp-bul">
+            <li>Built interactive UIs using React.js with dynamic components and client-side routing</li>
+            <li>Configured Node.js & Express backend structure for REST API workflows</li>
+          </ul>
+          <a href="https://personal-portfolio-mocha-six-82.vercel.app/mern-stack.pdf" target="_blank" class="exp-cert">View Certificate ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="sec" id="certifications">
+  <div class="si">
+    <div class="sec-hd rev"><div class="sec-hd-l"><div class="sec-lbl">05 — Certifications</div><h2 class="sec-title">Credentials &<br><span class="it">Badges</span></h2></div><div class="sec-div"></div></div>
+    <div class="cert-grid">
+      <a href="https://personal-portfolio-mocha-six-82.vercel.app/ai-ml.pdf" target="_blank" class="cert-card rev"><span class="cert-arr">↗</span><div class="cert-org">Eduskills</div><div class="cert-nm">Artificial Intelligence & Machine Learning</div><div class="cert-dot">Verified Certificate</div></a>
+      <a href="https://personal-portfolio-mocha-six-82.vercel.app/android.pdf" target="_blank" class="cert-card rev d1"><span class="cert-arr">↗</span><div class="cert-org">Eduskills</div><div class="cert-nm">Android Development</div><div class="cert-dot">Verified Certificate</div></a>
+      <a href="https://personal-portfolio-mocha-six-82.vercel.app/cloud-internship.pdf" target="_blank" class="cert-card rev d2"><span class="cert-arr">↗</span><div class="cert-org">Eduskills</div><div class="cert-nm">Cloud Foundations</div><div class="cert-dot">Verified Certificate</div></a>
+      <a href="#" class="cert-card rev d3"><span class="cert-arr">↗</span><div class="cert-org">Programming Hub</div><div class="cert-nm">Python Programming</div><div class="cert-dot">Verified Certificate</div></a>
+      <a href="https://personal-portfolio-mocha-six-82.vercel.app/adobe.pdf" target="_blank" class="cert-card rev d4"><span class="cert-arr">↗</span><div class="cert-org">Adobe</div><div class="cert-nm">Design Fundamentals with AI</div><div class="cert-dot">Verified Certificate</div></a>
+      <a href="https://personal-portfolio-mocha-six-82.vercel.app/cybersecurity.pdf" target="_blank" class="cert-card rev d1"><span class="cert-arr">↗</span><div class="cert-org">Great Learning</div><div class="cert-nm">Introduction to Cyber Security</div><div class="cert-dot">Verified Certificate</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="sec sec-alt" id="education">
+  <div class="si">
+    <div class="sec-hd rev"><div class="sec-hd-l"><div class="sec-lbl">06 — Education</div><h2 class="sec-title">Academic<br><span class="it">Foundation</span></h2></div><div class="sec-div"></div></div>
+    <div class="edu-list">
+      <div class="edu-row rev"><div><div class="edu-deg">Bachelor of Computer Applications (BCA)</div><div class="edu-inst">PB Siddhartha College of Arts & Science, Vijayawada</div></div><div class="edu-yr">2023 – 2026</div></div>
+      <div class="edu-row rev d1"><div><div class="edu-deg">Intermediate · BIPC Stream</div><div class="edu-inst">Narayana Junior College</div></div><div class="edu-yr">2018 – 2020</div></div>
+      <div class="edu-row rev d2"><div><div class="edu-deg">Class X · CBSE Board</div><div class="edu-inst">Jawahar DAV Public School</div></div><div class="edu-yr">2017 – 2018</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="ct-wrap" id="contact">
+  <div class="ct-bg">CONNECT</div>
+  <div class="ct-inner">
+    <div class="sec-lbl rev" style="margin-bottom:1.5rem">07 — Get In Touch</div>
+    <div class="ct-grid">
+      <div class="rev">
+        <h2 class="ct-headline">Let's Build<br>Something <span class="it">Remarkable</span><br>Together</h2>
+        <p class="ct-sub">Whether it's a data project, a frontend opportunity, or just a conversation — I'm always excited to connect with people who value great work.</p>
+        <a href="https://personal-portfolio-mocha-six-82.vercel.app/resume.pdf" target="_blank" class="btn-fill" style="margin-top:1rem">Download My Resume →</a>
+      </div>
+      <div class="ct-list rev d2">
+        <a href="mailto:ayeshasameena1028@gmail.com" class="ct-item"><div class="ct-ic">✉</div><div class="ct-b"><div class="ct-lbl">Email</div><div class="ct-val">ayeshasameena1028@gmail.com</div></div><span class="ct-arr">→</span></a>
+        <a href="http://www.linkedin.com/in/shaik-ayesha-sameena-0b4795289" target="_blank" class="ct-item"><div class="ct-ic" style="font-family:serif;font-weight:700;font-size:.9rem">in</div><div class="ct-b"><div class="ct-lbl">LinkedIn</div><div class="ct-val">shaik-ayesha-sameena</div></div><span class="ct-arr">→</span></a>
+        <a href="http://github.com/ShaikAyeshaSameena" target="_blank" class="ct-item"><div class="ct-ic">⌥</div><div class="ct-b"><div class="ct-lbl">GitHub</div><div class="ct-val">ShaikAyeshaSameena</div></div><span class="ct-arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="f-logo">Shaik Ayesha Sameena</span>
+  <p>© 2026 · ALL RIGHTS RESERVED</p>
+  <div class="f-links">
+    <a href="http://github.com/ShaikAyeshaSameena" target="_blank">GitHub</a>
+    <a href="http://www.linkedin.com/in/shaik-ayesha-sameena-0b4795289" target="_blank">LinkedIn</a>
+    <a href="mailto:ayeshasameena1028@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.width='64px';ring.style.height='64px';ring.style.borderColor='rgba(232,201,122,.7)'});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='40px';ring.style.height='40px';ring.style.borderColor='rgba(232,201,122,.4)'});
+});
+
+// Nav scroll + active
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>60);
+  const secs=document.querySelectorAll('section[id],div[id]'),lnks=document.querySelectorAll('.nav-links a');
+  let c='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-200)c=s.id});
+  lnks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c));
+});
+
+// Reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('up')});
+},{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
